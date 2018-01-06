@@ -18,9 +18,20 @@ $ cd ~/catkin_ws/
 $ catkin_make
 ```
 
-* rosrunで起動
+* rosrunで起動(特異スペクトル変換のみ)
 
 ```
-rosrun imu_sst imu_sst.py
+$ rosrun imu_sst imu_sst.py
 ```
 
+* roslaunchで起動(異常度をブラウザへ配信)
+
+```
+$ roslaunch imu_sst imu_sst_server.launch
+```
+
+ブラウザでアクセス
+
+```
+http://<ip_address>:8000
+```
