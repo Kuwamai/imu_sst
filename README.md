@@ -4,10 +4,10 @@ IMUで加速度計測して変化検知
 1. 手頃なIMUの値だすパッケージを用意
 1. 確認
 
-```
-$ rostopic list 
-/imu/data_raw
-```
+  ```
+  $ rostopic list 
+  /imu/data_raw
+  ```
 
 1. このリポジトリを持ってくる
 
