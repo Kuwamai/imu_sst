@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import rospy
 import numpy as np
 from sensor_msgs.msg import Imu
@@ -15,18 +16,25 @@ class Sst:
 		self.m = 2  # test matrixのパターン数
 		self.L = 3  # ラグ
 
-		self.X = np.array([])
-		self.Z = np.array([])
+		#self.X = np.zeros(self.M)
+		#self.Z = np.zeros(self.M)
+		self.data = np.zeros((1, self.L + self.k + self.M - 1))
 
 	def imu_callback(self, message):
 		accel = message.linear_acceleration
-		print accel.z
+		self.data = np.append(self.data, np.array([[accel.z]]), axis=1)
+		self.data = np.delete(self.data, 0, axis=1)
 
-# def recv_imu(message):
-#	accel = message.linear_acceleration
-#	omega = message.angular_velocity
-#	print accel.z
-	
+		self.X = np.empty((0, self.M))
+		for i in range(self.n):
+			self.X = np.append(self.X, self.data[0 : 1, i : i + self.M], axis=0)
+
+		self.Z = np.empty((0, self.M))
+		for i in range(self.k):
+			self.Z = np.append(self.Z, self.data[0 : 1, i + self.L : i + self.L + self.M], axis=0)
+		
+		print self.X
+
 if __name__ == '__main__':
 	rospy.init_node('imu_sst')
 	sst = Sst()
