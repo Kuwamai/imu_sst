@@ -16,24 +16,33 @@ class Sst:
 		self.m = 2  # test matrixのパターン数
 		self.L = 3  # ラグ
 
-		#self.X = np.zeros(self.M)
-		#self.Z = np.zeros(self.M)
-		self.data = np.zeros((1, self.L + self.k + self.M - 1))
+		self.data = np.zeros((self.L + self.k + self.M - 1, 1))
 
 	def imu_callback(self, message):
 		accel = message.linear_acceleration
-		self.data = np.append(self.data, np.array([[accel.z]]), axis=1)
-		self.data = np.delete(self.data, 0, axis=1)
+		self.data = np.append(self.data, np.array([[accel.z]]), axis=0)
+		self.data = np.delete(self.data, 0, axis=0)
 
-		self.X = np.empty((0, self.M))
+		X = np.empty((self.M, 0))
 		for i in range(self.n):
-			self.X = np.append(self.X, self.data[0 : 1, i : i + self.M], axis=0)
+			X = np.append(X, self.data[i : i + self.M, 0 : 1], axis=1)
 
-		self.Z = np.empty((0, self.M))
+		Z = np.empty((self.M, 0))
 		for i in range(self.k):
-			self.Z = np.append(self.Z, self.data[0 : 1, i + self.L : i + self.L + self.M], axis=0)
+			Z = np.append(Z, self.data[i + self.L : i + self.L + self.M, 0 : 1], axis=1)
 		
-		print self.X
+		U1, S1, V1  = np.linalg.svd(X, full_matrices=False)
+		U2, S2, V2  = np.linalg.svd(Z, full_matrices=False)
+
+		U_r  = U1[:, :self.r]
+		Q_m  = U2[:, :self.m]
+
+		s = np.linalg.svd(U_r.T.dot(Q_m), full_matrices=False, compute_uv=False)
+		anomaly_score = 1 - s[0]
+		print anomaly_score
+
+#		if anomaly_score > 0.7:
+#			print "yhea!" + str(anomaly_score)
 
 if __name__ == '__main__':
 	rospy.init_node('imu_sst')
