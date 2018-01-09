@@ -4,10 +4,12 @@
 import rospy
 import numpy as np
 from sensor_msgs.msg import Imu
+from std_msgs.msg import Float64
 
 class Sst:
 	def __init__(self):
-		self._sst = rospy.Subscriber("imu/data_raw", Imu, self.imu_callback)
+		self._sub = rospy.Subscriber("imu/data_raw", Imu, self.imu_callback)
+		self._pub = rospy.Publisher("anomaly_score", Float64, queue_size=10)
 
 		self.M = 5  # 窓幅
 		self.n = 3  # trajectory matrixの列数
@@ -39,10 +41,8 @@ class Sst:
 
 		s = np.linalg.svd(U_r.T.dot(Q_m), full_matrices=False, compute_uv=False)
 		anomaly_score = 1 - s[0]
-		print anomaly_score
 
-#		if anomaly_score > 0.7:
-#			print "yhea!" + str(anomaly_score)
+		self._pub.publish(anomaly_score)
 
 if __name__ == '__main__':
 	rospy.init_node('imu_sst')
