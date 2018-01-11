@@ -35,3 +35,7 @@ $ roslaunch imu_sst imu_sst_server.launch
 ```
 http://<ip_address>:8000
 ```
+
+## 疑問メモ
+* JSONってなんぞ
+* getElement何ちゃらもなんぞ
