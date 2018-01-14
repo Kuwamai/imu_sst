@@ -1,6 +1,7 @@
 # imu_sst
 ## Description
 * IMUが取得したデータをsubscribeし、singular spectrum transformationして変化度をpublishする
+* Publishした変化度がブラウザ上でplotされる
 * 動画はこんな感じ
 ## Requirements
 * Raspberry Pi3
