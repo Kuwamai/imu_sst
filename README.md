@@ -3,6 +3,7 @@
 * IMUが取得したデータをsubscribeし、singular spectrum transformationして変化度をpublishする
 * Publishした変化度がブラウザ上でplotされる
 * 動画はこんな感じ
+  * [https://youtu.be/kiFxvc0k8qg](https://youtu.be/kiFxvc0k8qg)
 ## Requirements
 * Raspberry Pi3
 * IMU
