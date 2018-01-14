@@ -5,6 +5,9 @@
 ## Requirements
 * Raspberry Pi3
 * IMU
+* Ubuntu16.04
+* ROS kinetic
+* rosbridge_server
 ## Installation
 * 手頃なIMUをパブリッシュするパッケージを実行
 * 以下のコマンドで`/imu/data_raw`があることを確認
