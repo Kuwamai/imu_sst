@@ -1,18 +1,21 @@
 # imu_sst
 ## Description
-* IMUが取得したデータをsubscribeし、singular spectrum transformationして変化度をpublishします
+* IMUが取得したデータをsubscribeし、singular spectrum transformationして変化度をpublishする
 * 動画はこんな感じ
-## 使い方
-* 手頃なIMUをパブリッシュするパッケージを用意します
-* 以下のコマンドでトピックを確認
-  * `/imu/data_raw`をsubscribeします
+## Requirements
+* Raspberry Pi3
+* IMU
+## Installation
+* 手頃なIMUをパブリッシュするパッケージを実行
+* 以下のコマンドで`/imu/data_raw`があることを確認
 
 ```
 $ rostopic list 
 /imu/data_raw
 ```
 
-* このリポジトリを持ってくる
+* このリポジトリをcloneする
+* 以下のコマンドを実行
 
 ```
 $ cd ~/catkin_ws/src/
@@ -21,24 +24,19 @@ $ cd ~/catkin_ws/
 $ catkin_make
 ```
 
-* rosrunで起動(特異スペクトル変換のみ)
+## Usage
 
-```
-$ rosrun imu_sst imu_sst.py
-```
-
-* roslaunchで起動(異常度をブラウザへ配信)
+* roslaunchで起動
 
 ```
 $ roslaunch imu_sst imu_sst_server.launch
 ```
 
-ブラウザでアクセス
+* ブラウザでアクセス
 
 ```
 http://<ip_address>:8000
 ```
 
-## 疑問メモ
-* JSONってなんぞ
-* getElement何ちゃらもなんぞ
+## License
+This repository is licensed under the BSD license, see [LICENSE](./LICENSE).
