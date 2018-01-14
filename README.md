@@ -9,7 +9,7 @@
 * ROS kinetic
 * rosbridge_server
 ## Installation
-* 手頃なIMUをパブリッシュするパッケージを実行
+* 手頃なIMUをパブリッシュするパッケージを実行しておく
 * 以下のコマンドで`/imu/data_raw`があることを確認
 
 ```
