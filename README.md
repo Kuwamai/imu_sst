@@ -1,8 +1,11 @@
 # imu_sst
-IMUで加速度計測して変化検知
+## Description
+* IMUが取得したデータをsubscribeし、singular spectrum transformationして変化度をpublishします
+* 動画はこんな感じ
 ## 使い方
-* 手頃なIMUをパブリッシュするパッケージを用意
-* 確認
+* 手頃なIMUをパブリッシュするパッケージを用意します
+* 以下のコマンドでトピックを確認
+  * `/imu/data_raw`をsubscribeします
 
 ```
 $ rostopic list 
