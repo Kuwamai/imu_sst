@@ -11,7 +11,7 @@ class Sst:
 		self._sub = rospy.Subscriber("imu/data_raw", Imu, self.imu_callback)
 		self._pub = rospy.Publisher("anomaly_score", Float64, queue_size=10)
 
-		self.M = 5  # 窓幅
+		self.M = 55555  # 窓幅
 		self.n = 3  # trajectory matrixの列数
 		self.r = 2  # trajectory matrixのパターン数
 		self.k = 3  # test matrixの列数
